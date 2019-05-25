@@ -39,6 +39,8 @@ class BusinessDAO extends DBConnection
             $business->setAddress($row['Address']);
             $business->setLatitude($row['Latitude']);
             $business->setLongitude($row['Longitude']);
+            $business->setLongitude($row['Longitude']);
+            $business->setLongitude($row['ImageURL']);
 
             $businessType = new UserType($row['UserTypeID']);
             $businessType->setName($row['TypeName']);
@@ -53,11 +55,12 @@ class BusinessDAO extends DBConnection
 
     public function saveBusiness(Business $business)
     {
-        $query = "INSERT INTO business(Name, Address, Latitude, Longitude) 
+        $query = "INSERT INTO business(Name, Address, Latitude, Longitude, ImageURL) 
             VALUES ('{$this->getRealEscapeString($business->getName())}' 
                   , '".md5($this->getRealEscapeString($business->getAddress()))."' 
                   , '{$this->getRealEscapeString($business->getLatitude())}' 
-                  , '{$this->getRealEscapeString($business->getLongitude())}'})";
+                  , '{$this->getRealEscapeString($business->getLongitude())}'
+                  , '{$this->getRealEscapeString($business->getImageURL())}'})";
         $this->executeQuery($query);
         return $this->getGeneratedId();
     }
@@ -69,6 +72,7 @@ class BusinessDAO extends DBConnection
              `Address` = '".md5($this->getRealEscapeString($business->getAddress()))."',
              `Latitude` = '{$this->getRealEscapeString($business->getLatitude())}', 
              `Longitude` = '{$this->getRealEscapeString($business->getLongitude())}', 
+             `ImageURL` = '{$this->getRealEscapeString($business->getImageURL())}', 
               WHERE `ID` = {$this->getRealEscapeString($business->getId())}";
 
         $this->executeQuery($query);
@@ -94,6 +98,7 @@ class BusinessDAO extends DBConnection
             $business->setAddress($row['Address']);
             $business->setLatitude($row['Latitude']);
             $business->setLongitude($row['Longitude']);
+            $business->setImageURL($row['ImageURL']);
 
             $businessType = new UserType($row['UserTypeID']);
             $businessType->setName($row['TypeName']);
@@ -104,6 +109,24 @@ class BusinessDAO extends DBConnection
             array_push($businesses, $business);
         }
         return $businesses;
+    }
+
+    // Start Products
+
+    public function getProducts() {
+        $query = "SELECT product.*  
+                 FROM product";
+
+        $result = $this->executeQuery($query);
+        $products = array();
+        while ($row = mysqli_fetch_assoc($result)) {
+            $prodcut = new Product($row['ID']);
+            $prodcut->setName($row['Name']);
+            $prodcut->setPrice($row['Price']);
+
+            array_push($products, $prodcut);
+        }
+        return $products;
     }
 
     public function getProductsByBusinessId($businessId) {
@@ -125,6 +148,9 @@ class BusinessDAO extends DBConnection
         return $products;
     }
 
+    // Start Business Categories
+
+
     public function getBusinessCategories($filter)
     {
         $query = "SELECT business_category.*  
@@ -144,6 +170,7 @@ class BusinessDAO extends DBConnection
             $category = new BusinessCategory($row['ID']);
             $category->setName($row['Name']);
             $category->setDescription($row['Description']);
+            $category->setImageURL($row['ImageURL']);
 
             array_push($businessCategories, $category);
         }
@@ -154,7 +181,8 @@ class BusinessDAO extends DBConnection
     {
         $query = "INSERT INTO business_category(Name, Description) 
             VALUES ('{$this->getRealEscapeString($businessCategory->getName())}' 
-                  ,'{$this->getRealEscapeString($businessCategory->getDescription())}'})";
+                  ,'{$this->getRealEscapeString($businessCategory->getDescription())}'
+                  ,'{$this->getRealEscapeString($businessCategory->getImageURL())}'})";
         $this->executeQuery($query);
         return $this->getGeneratedId();
     }
@@ -164,6 +192,7 @@ class BusinessDAO extends DBConnection
         $query = "UPDATE `business_category` SET 
              `Name` = '{$this->getRealEscapeString($businessCategory->getName())}',
              `Longitude` = '{$this->getRealEscapeString($businessCategory->getDescription())}', 
+             `ImageURL` = '{$this->getRealEscapeString($businessCategory->getImageURL())}' 
               WHERE `ID` = {$this->getRealEscapeString($businessCategory->getId())}";
 
         $this->executeQuery($query);

@@ -6,18 +6,55 @@
  * Time: 4:21 PM
  */
 
-class Business extends User
+class Business
 {
+    private $id;
+    private $name;
     private $address;
     private $latitude;
     private $longitude;
+    private $imageURL;
+
     /**
      * Customer constructor.
      */
     public function __construct($id)
     {
-        parent::__construct($id);
+        $this->id = $id;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param mixed $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param mixed $name
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+    }
+
 
     /**
      * @return mixed
@@ -65,6 +102,22 @@ class Business extends User
     public function setLongitude($longitude)
     {
         $this->longitude = $longitude;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getImageURL()
+    {
+        return $this->imageURL;
+    }
+
+    /**
+     * @param mixed $imageURL
+     */
+    public function setImageURL($imageURL)
+    {
+        $this->imageURL = $imageURL;
     }
 
 

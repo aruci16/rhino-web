@@ -11,6 +11,7 @@ class BusinessCategory
     private $id;
     private $name;
     private $description;
+    private $imageURL;
 
     /**
      * BusinessCategory constructor.
@@ -68,6 +69,23 @@ class BusinessCategory
     {
         $this->description = $description;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getImageURL()
+    {
+        return $this->imageURL;
+    }
+
+    /**
+     * @param mixed $imageURL
+     */
+    public function setImageURL($imageURL)
+    {
+        $this->imageURL = $imageURL;
+    }
+
 
 
 }

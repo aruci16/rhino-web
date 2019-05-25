@@ -177,4 +177,15 @@ class UserDAO extends DBConnection
         $subscription->setCategories($categories);
         return $subscription;
     }
+
+    public function login($username, $password)
+    {
+        $stmt = $this->get_db()->prepare("SELECT * FROM `user` WHERE `Username`=:username AND `Password`=:password");
+        $stmt->bindValue(":username", $username, PDO::PARAM_STR);
+        $stmt->bindValue(":password", $password, PDO::PARAM_STR);
+
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }
