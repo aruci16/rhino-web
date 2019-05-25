@@ -97,6 +97,8 @@ create table discount
   BusinessProductID int unsigned not null,
   Value double unsigned not null,
   Description varchar(200) null,
+  StartTime datetime null,
+  EndTime datetime null,
   constraint ID_UNIQUE
     unique (ID),
   constraint businessproduct_fk
@@ -104,6 +106,17 @@ create table discount
   constraint discount_type_fk
     foreign key (DiscountTypeID) references discount_type (id)
 );
+
+create index businessproduct_fk_idx
+  on discount (BusinessProductID);
+
+create index discount_type_fk_idx
+  on discount (DiscountTypeID);
+
+alter table discount
+  add primary key (ID);
+
+
 
 create index businessproduct_fk_idx
   on discount (BusinessProductID);
@@ -131,16 +144,37 @@ create table user_type
 create table user
 (
   ID int unsigned auto_increment,
+  Username varchar(45) not null,
+  Password varchar(45) not null,
   Name varchar(45) not null,
   Surname varchar(45) not null,
   Phone varchar(45) null,
   Email varchar(45) null,
   UserTypeID int unsigned null,
+  isActive tinyint(1) default 1 not null,
   constraint ID_UNIQUE
     unique (ID),
+  constraint user_Username_uindex
+    unique (Username),
   constraint user_type_fk
     foreign key (UserTypeID) references user_type (id)
 );
+
+create index user_type_fk_idx
+  on user (UserTypeID);
+
+alter table user
+  add primary key (ID);
+
+
+
+create index user_type_fk_idx
+	on user (UserTypeID);
+
+alter table user
+	add primary key (ID);
+
+
 
 create table reservation
 (
@@ -148,6 +182,7 @@ create table reservation
   UserID int unsigned not null,
   DiscountID int unsigned not null,
   DateTime datetime not null,
+  Code int null,
   constraint ID_UNIQUE
     unique (ID),
   constraint res_discount_fk
@@ -155,6 +190,17 @@ create table reservation
   constraint res_user_fk
     foreign key (UserID) references user (id)
 );
+
+create index res_discount_fk_idx
+  on reservation (DiscountID);
+
+create index res_user_fk_idx
+  on reservation (UserID);
+
+alter table reservation
+  add primary key (ID);
+
+
 
 create index res_discount_fk_idx
   on reservation (DiscountID);
