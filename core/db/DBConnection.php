@@ -38,10 +38,10 @@ class DBConnection
     {
         switch ($mode) {
             case self::$ALEKS_TEST:
-                $this->DB_USER = "root";
-                $this->DB_PASS = "root";
-                $this->DB_NAME = "rhino";
-                $this->DB_HOST = "localhost";
+                $this->DB_USER = "b0gSPhRAvo";
+                $this->DB_PASS = "6BsAYM6TWM";
+                $this->DB_NAME = "b0gSPhRAvo";
+                $this->DB_HOST = "remotemysql.com";
                 break;
             case self::$ALEKS_PRODUCTION:
                 $this->DB_USER = "aruci16";

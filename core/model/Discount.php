@@ -11,7 +11,8 @@ class Discount
     private $id;
     private $name;
     private $discountTypeID;
-    private $businessProductID;
+    private $business;
+    private $category;
     private $value;
     private $description;
     private $startTime;
@@ -153,6 +154,39 @@ class Discount
     {
         $this->endTime = $endTime;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getBusiness()
+    {
+        return $this->business;
+    }
+
+    /**
+     * @param mixed $business
+     */
+    public function setBusiness($business)
+    {
+        $this->business = $business;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCategory()
+    {
+        return $this->category;
+    }
+
+    /**
+     * @param mixed $category
+     */
+    public function setCategory($category)
+    {
+        $this->category = $category;
+    }
+
 
 
 

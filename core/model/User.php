@@ -11,6 +11,7 @@ class User
     private $id;
     private $name;
     private $surname;
+    private $phone;
     private $username;
     private $password;
     private $isActive;
@@ -119,6 +120,22 @@ class User
     public function setIsActive($isActive)
     {
         $this->isActive = $isActive;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPhone()
+    {
+        return $this->phone;
+    }
+
+    /**
+     * @param mixed $phone
+     */
+    public function setPhone($phone)
+    {
+        $this->phone = $phone;
     }
 
 
