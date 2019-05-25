@@ -116,17 +116,6 @@ create index discount_type_fk_idx
 alter table discount
   add primary key (ID);
 
-
-
-create index businessproduct_fk_idx
-  on discount (BusinessProductID);
-
-create index discount_type_fk_idx
-  on discount (DiscountTypeID);
-
-alter table discount
-  add primary key (ID);
-
 alter table product
   add primary key (ID);
 
@@ -166,16 +155,6 @@ create index user_type_fk_idx
 alter table user
   add primary key (ID);
 
-
-
-create index user_type_fk_idx
-	on user (UserTypeID);
-
-alter table user
-	add primary key (ID);
-
-
-
 create table reservation
 (
   ID int unsigned auto_increment,
@@ -190,17 +169,6 @@ create table reservation
   constraint res_user_fk
     foreign key (UserID) references user (id)
 );
-
-create index res_discount_fk_idx
-  on reservation (DiscountID);
-
-create index res_user_fk_idx
-  on reservation (UserID);
-
-alter table reservation
-  add primary key (ID);
-
-
 
 create index res_discount_fk_idx
   on reservation (DiscountID);

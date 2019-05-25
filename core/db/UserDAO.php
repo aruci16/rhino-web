@@ -78,4 +78,66 @@ class UserDAO extends DBConnection
         $this->executeQuery($query);
         return $this->getGeneratedId();
     }
+
+    public function updateUser(User $user)
+    {
+        $query = "UPDATE `user` SET 
+             `Username` = '{$this->getRealEscapeString($user->getUsername())}',
+             `Password` = '".md5($this->getRealEscapeString($user->getPassword()))."',
+             `Name` = '{$this->getRealEscapeString($user->getName())}', 
+             `Surname` = '{$this->getRealEscapeString($user->getSurname())}', 
+             `Phone` = '{$this->getRealEscapeString($user->getPhone())}',
+             `Email` = '{$this->getRealEscapeString($user->getEmail())}',
+             `IsActive` = '{$this->getRealEscapeString($user->getisActive())}'
+              WHERE `ID` = {$this->getRealEscapeString($user->getId())}";
+
+        $this->executeQuery($query);
+    }
+
+    public function updateUserNoPassword(User $user)
+    {
+        $query = "UPDATE `user` SET 
+             `Username` = '{$this->getRealEscapeString($user->getUsername())}',
+             `Name` = '{$this->getRealEscapeString($user->getName())}', 
+             `Surname` = '{$this->getRealEscapeString($user->getSurname())}', 
+             `Email` = '{$this->getRealEscapeString($user->getEmail())}',
+             `Phone` = '{$this->getRealEscapeString($user->getPhone())}',
+             `IsActive` = '{$this->getRealEscapeString($user->getisActive())}'
+              WHERE `ID` = {$this->getRealEscapeString($user->getId())}";
+
+
+        $this->executeQuery($query);
+        return mysqli_affected_rows($this->getDB());
+    }
+
+    public function updateUserStatus($userId, $status)
+    {
+        $query = "UPDATE user " .
+            "SET IsActive = {$this->getRealEscapeString($status)} " .
+            "WHERE ID = {$this->getRealEscapeString($userId)}";
+
+        $this->executeQuery($query);
+    }
+
+    public function deleteUser($id)
+    {
+        $query = "DELETE FROM user WHERE ID = {$this->getRealEscapeString($id)} ";
+        $this->executeQuery($query);
+    }
+
+    public function getUserTypes()
+    {
+        $query = "SELECT * FROM user_type";
+
+        $result = $this->executeQuery($query);
+        $userTypes = array();
+        while ($row = mysqli_fetch_assoc($result)) {
+            $userType = new UserType($row['ID']);
+            $userType->setName($row['Name']);
+            $userType->setDescription($row['Description']);
+
+            array_push($userTypes, $userType);
+        }
+        return $userTypes;
+    }
 }
