@@ -51,6 +51,17 @@ class DiscountDAO extends DBConnection
         return $discounts;
     }
 
+    public  function saveDiscount(Discount $discount){
+        $query = "INSERT INTO discount(id, name, discounttypeid, businessproductid, value, description, starttime, endtime) " .
+            "VALUES ({$this->getRealEscapeString($discount->getName())} " .
+            "      , {$this->getRealEscapeString($discount->getDiscountTypeID())} " .
+            "      , {$this->getRealEscapeString($discount->getValue())} " .
+            "      , {$this->getRealEscapeString($discount->getDescription())} " .
+            "      , {$this->getRealEscapeString($discount->getStartTime())}".
+            "      , '{$this->getRealEscapeString($discount->getEndTime())}') ";
+
+        $this->executeQuery($query);
+    }
 
 
 }
