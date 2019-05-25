@@ -1,19 +1,19 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: grent
- * Date: 5/25/2019
- * Time: 4:31 PM
+ * User: Aleks Ruci
+ * Date: 25.05.2019
+ * Time: 17:40
  */
 
-class Product
+class BusinessCategory
 {
     private $id;
     private $name;
-    private $price;
+    private $description;
 
     /**
-     * Product constructor.
+     * BusinessCategory constructor.
      * @param $id
      */
     public function __construct($id)
@@ -56,20 +56,18 @@ class Product
     /**
      * @return mixed
      */
-    public function getPrice()
+    public function getDescription()
     {
-        return $this->price;
+        return $this->description;
     }
 
     /**
-     * @param mixed $price
+     * @param mixed $description
      */
-    public function setPrice($price)
+    public function setDescription($description)
     {
-        $this->price = $price;
+        $this->description = $description;
     }
-
-
 
 
 }

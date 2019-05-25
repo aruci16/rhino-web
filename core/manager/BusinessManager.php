@@ -14,39 +14,44 @@ class BusinessManager
     public function getBusinessByID($id)
     {
         $filter = array("id" => $id, "name" => null);
-        $userDao = new BusinessDAO();
-        $user = $userDao->getBusinesses($filter)[0];
+        $businessDao = new BusinessDAO();
+        $user = $businessDao->getBusinesses($filter)[0];
         return $user;
     }
 
     public function getBusinessesByName($name)
     {
         $filter = array("id" => null, "name" => $name);
-        $userDao = new BusinessDAO();
-        $users = $userDao->getBusinesses($filter);
+        $businessDao = new BusinessDAO();
+        $users = $businessDao->getBusinesses($filter);
         return $users;
     }
 
     public function getAllBusinesses()
     {
         $filter = array("id" => null, "name" => null);
-        $userDao = new BusinessDAO();
-        $users = $userDao->getBusinesses($filter);
+        $businessDao = new BusinessDAO();
+        $users = $businessDao->getBusinesses($filter);
         return $users;
     }
 
     public function saveBusiness(Business $business) {
-        $userDao = new BusinessDAO();
-        return $userDao->saveBusiness($business);
+        $businessDao = new BusinessDAO();
+        return $businessDao->saveBusiness($business);
     }
 
     public function updateBusiness(Business $business){
-        $userDao = new BusinessDAO();
-        return $userDao->updateBusiness($business);
+        $businessDao = new BusinessDAO();
+        return $businessDao->updateBusiness($business);
     }
 
     public function deleteBusiness($userId) {
-        $userDao = new BusinessDAO();
-        $userDao->deleteBusiness($userId);
+        $businessDao = new BusinessDAO();
+        $businessDao->deleteBusiness($userId);
+    }
+    
+    public function getBusinessesByCategoryId($categoryId) {
+        $businessDao = new BusinessDAO();
+        return $businessDao->getBusinessesByCategoryId($categoryId);
     }
 }

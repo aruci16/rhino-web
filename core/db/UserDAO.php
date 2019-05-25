@@ -140,4 +140,41 @@ class UserDAO extends DBConnection
         }
         return $userTypes;
     }
+
+
+    public function getUserSubscriptions($userId) {
+        $query = "SELECT  user_subscription.ID AS SubsriptionID, 
+                          user.*,
+                          business_category.ID AS CategoryID,
+                          business_category.Name AS CategoryName
+                 FROM user_subscription
+                 INNER JOIN user ON user_subscription.UserID = user.ID
+                 INNER JOIN business_category ON user_subscription.BusinessCategoryID = business_category.ID
+                 WHERE user.ID = {$this->getRealEscapeString($userId)} ";
+
+        $result = $this->executeQuery($query);
+        $categories = array();
+        $subscription = null;
+        while ($row = mysqli_fetch_assoc($result)) {
+            $subscription = new UserSubscriptions($row['SubsriptionID']);
+
+            $user = new User($row['ID']);
+            $user->setUsername($row['Username']);
+            $user->setPassword($row['Password']);
+            $user->setName($row['Name']);
+            $user->setSurname($row['Surname']);
+            $user->setPhone($row['Phone']);
+            $user->setEmail($row['Email']);
+            $user->setIsActive($row['IsActive']);
+
+            $category = new BusinessCategory($row['CategoryID']);
+            $category->setName($row['CategoryName']);
+
+            $subscription->setUser($user);
+
+            array_push($categories, $category);
+        }
+        $subscription->setCategories($categories);
+        return $subscription;
+    }
 }
