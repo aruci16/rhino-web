@@ -1,20 +1,19 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: grent
- * Date: 5/25/2019
- * Time: 4:31 PM
+ * User: Aleks Ruci
+ * Date: 25.05.2019
+ * Time: 17:31
  */
 
-class Product
+class UserSubscriptions
 {
     private $id;
-    private $name;
-    private $price;
+    private $user;
+    private $categories;
 
     /**
-     * Product constructor.
-     * @param $id
+     * UserSubscriptions constructor.
      */
     public function __construct($id)
     {
@@ -40,33 +39,33 @@ class Product
     /**
      * @return mixed
      */
-    public function getName()
+    public function getUser()
     {
-        return $this->name;
+        return $this->user;
     }
 
     /**
-     * @param mixed $name
+     * @param mixed $user
      */
-    public function setName($name)
+    public function setUser($user)
     {
-        $this->name = $name;
+        $this->user = $user;
     }
 
     /**
      * @return mixed
      */
-    public function getPrice()
+    public function getCategories()
     {
-        return $this->price;
+        return $this->categories;
     }
 
     /**
-     * @param mixed $price
+     * @param mixed $categories
      */
-    public function setPrice($price)
+    public function setCategories($categories)
     {
-        $this->price = $price;
+        $this->categories = $categories;
     }
 
 

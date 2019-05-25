@@ -1,0 +1,7 @@
+RewriteEngine On
+Options +FollowSymLinks
+
+RewriteRule ^$ controller/login.php
+RewriteRule ^login$ controller/login.php
+RewriteRule ^signup$ controller/sign-up.php
+RewriteRule ^home$ controller/submission.php

@@ -78,4 +78,114 @@ class UserDAO extends DBConnection
         $this->executeQuery($query);
         return $this->getGeneratedId();
     }
+
+    public function updateUser(User $user)
+    {
+        $query = "UPDATE `user` SET 
+             `Username` = '{$this->getRealEscapeString($user->getUsername())}',
+             `Password` = '".md5($this->getRealEscapeString($user->getPassword()))."',
+             `Name` = '{$this->getRealEscapeString($user->getName())}', 
+             `Surname` = '{$this->getRealEscapeString($user->getSurname())}', 
+             `Phone` = '{$this->getRealEscapeString($user->getPhone())}',
+             `Email` = '{$this->getRealEscapeString($user->getEmail())}',
+             `IsActive` = '{$this->getRealEscapeString($user->getisActive())}'
+              WHERE `ID` = {$this->getRealEscapeString($user->getId())}";
+
+        $this->executeQuery($query);
+    }
+
+    public function updateUserNoPassword(User $user)
+    {
+        $query = "UPDATE `user` SET 
+             `Username` = '{$this->getRealEscapeString($user->getUsername())}',
+             `Name` = '{$this->getRealEscapeString($user->getName())}', 
+             `Surname` = '{$this->getRealEscapeString($user->getSurname())}', 
+             `Email` = '{$this->getRealEscapeString($user->getEmail())}',
+             `Phone` = '{$this->getRealEscapeString($user->getPhone())}',
+             `IsActive` = '{$this->getRealEscapeString($user->getisActive())}'
+              WHERE `ID` = {$this->getRealEscapeString($user->getId())}";
+
+
+        $this->executeQuery($query);
+        return mysqli_affected_rows($this->getDB());
+    }
+
+    public function updateUserStatus($userId, $status)
+    {
+        $query = "UPDATE user " .
+            "SET IsActive = {$this->getRealEscapeString($status)} " .
+            "WHERE ID = {$this->getRealEscapeString($userId)}";
+
+        $this->executeQuery($query);
+    }
+
+    public function deleteUser($id)
+    {
+        $query = "DELETE FROM user WHERE ID = {$this->getRealEscapeString($id)} ";
+        $this->executeQuery($query);
+    }
+
+    public function getUserTypes()
+    {
+        $query = "SELECT * FROM user_type";
+
+        $result = $this->executeQuery($query);
+        $userTypes = array();
+        while ($row = mysqli_fetch_assoc($result)) {
+            $userType = new UserType($row['ID']);
+            $userType->setName($row['Name']);
+            $userType->setDescription($row['Description']);
+
+            array_push($userTypes, $userType);
+        }
+        return $userTypes;
+    }
+
+
+    public function getUserSubscriptions($userId) {
+        $query = "SELECT  user_subscription.ID AS SubsriptionID, 
+                          user.*,
+                          business_category.ID AS CategoryID,
+                          business_category.Name AS CategoryName
+                 FROM user_subscription
+                 INNER JOIN user ON user_subscription.UserID = user.ID
+                 INNER JOIN business_category ON user_subscription.BusinessCategoryID = business_category.ID
+                 WHERE user.ID = {$this->getRealEscapeString($userId)} ";
+
+        $result = $this->executeQuery($query);
+        $categories = array();
+        $subscription = null;
+        while ($row = mysqli_fetch_assoc($result)) {
+            $subscription = new UserSubscriptions($row['SubsriptionID']);
+
+            $user = new User($row['ID']);
+            $user->setUsername($row['Username']);
+            $user->setPassword($row['Password']);
+            $user->setName($row['Name']);
+            $user->setSurname($row['Surname']);
+            $user->setPhone($row['Phone']);
+            $user->setEmail($row['Email']);
+            $user->setIsActive($row['IsActive']);
+
+            $category = new BusinessCategory($row['CategoryID']);
+            $category->setName($row['CategoryName']);
+
+            $subscription->setUser($user);
+
+            array_push($categories, $category);
+        }
+        $subscription->setCategories($categories);
+        return $subscription;
+    }
+
+    public function login($username, $password)
+    {
+        $stmt = $this->get_db()->prepare("SELECT * FROM `user` WHERE `Username`=:username AND `Password`=:password");
+        $stmt->bindValue(":username", $username, PDO::PARAM_STR);
+        $stmt->bindValue(":password", $password, PDO::PARAM_STR);
+
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }

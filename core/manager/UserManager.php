@@ -6,6 +6,9 @@
  * Time: 16:32
  */
 
+require_once '../db/UserDAO.php';
+require_once '../model/User.php';
+
 class UserManager
 {
     public function __construct()
@@ -33,5 +36,30 @@ class UserManager
         $userDao = new UserDAO();
         $user= $userDao->getUsers($filter);
         return $user;
+    }
+
+    public function getUserTypes() {
+        $userDao = new UserDAO();
+        return $userDao->getUserTypes();
+    }
+
+    public function updateUser(User $user){
+        $userDao = new UserDAO();
+        return $userDao->updateUser($user);
+    }
+
+    public function updateUserNoPass(User $user){
+        $userDao = new UserDAO();
+        return $userDao->updateUserNoPassword($user);
+    }
+
+    public function saveUser(User $user) {
+        $userDao = new UserDAO();
+        return $userDao->saveUser($user);
+    }
+
+    public function deleteUser($userId) {
+        $userDao = new UserDAO();
+        $userDao->deleteUser($userId);
     }
 }

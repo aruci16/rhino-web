@@ -1,22 +1,21 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: grent
- * Date: 5/25/2019
- * Time: 4:21 PM
+ * User: Aleks Ruci
+ * Date: 25.05.2019
+ * Time: 17:40
  */
 
-class Business
+class BusinessCategory
 {
     private $id;
     private $name;
-    private $address;
-    private $latitude;
-    private $longitude;
+    private $description;
     private $imageURL;
 
     /**
-     * Customer constructor.
+     * BusinessCategory constructor.
+     * @param $id
      */
     public function __construct($id)
     {
@@ -55,53 +54,20 @@ class Business
         $this->name = $name;
     }
 
-
     /**
      * @return mixed
      */
-    public function getAddress()
+    public function getDescription()
     {
-        return $this->address;
+        return $this->description;
     }
 
     /**
-     * @param mixed $address
+     * @param mixed $description
      */
-    public function setAddress($address)
+    public function setDescription($description)
     {
-        $this->address = $address;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getLatitude()
-    {
-        return $this->latitude;
-    }
-
-    /**
-     * @param mixed $latitude
-     */
-    public function setLatitude($latitude)
-    {
-        $this->latitude = $latitude;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getLongitude()
-    {
-        return $this->longitude;
-    }
-
-    /**
-     * @param mixed $longitude
-     */
-    public function setLongitude($longitude)
-    {
-        $this->longitude = $longitude;
+        $this->description = $description;
     }
 
     /**

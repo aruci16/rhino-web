@@ -11,10 +11,12 @@ class User
     private $id;
     private $name;
     private $surname;
-    private $phone;
     private $username;
     private $password;
+    private $email;
+    private $phone;
     private $isActive;
+    private $userType;
 
     /**
      * User constructor.
@@ -125,6 +127,22 @@ class User
     /**
      * @return mixed
      */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * @param mixed $email
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+    }
+
+    /**
+     * @return mixed
+     */
     public function getPhone()
     {
         return $this->phone;
@@ -136,6 +154,22 @@ class User
     public function setPhone($phone)
     {
         $this->phone = $phone;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUserType()
+    {
+        return $this->userType;
+    }
+
+    /**
+     * @param mixed $userType
+     */
+    public function setUserType($userType)
+    {
+        $this->userType = $userType;
     }
 
 
