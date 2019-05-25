@@ -20,6 +20,7 @@ class DBConnection
     private $DB_HOST;
 
     private $db;
+    private $connection;
 
     public function __construct()
     {
@@ -28,6 +29,9 @@ class DBConnection
         $this->db = new PDO('mysql:host='.$this->DB_HOST.';dbname='.$this->DB_NAME.';charset=utf8',
             $this->DB_USER, $this->DB_PASS);
         $this->db->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
+
+        $this->connection = mysqli_connect($this->DB_HOST,$this->DB_USER,$this->DB_PASS,$this->DB_NAME);
+
     }
 
     private function chooseDB($mode)
@@ -67,13 +71,31 @@ class DBConnection
         return $this->db;
     }
 
+    public function getMysqliDB()
+    {
+        return $this->connection;
+    }
+
     public function __destruct()
     {
         $this->db = null;
+        mysqli_close($this->connection);
     }
 
     public function prepare($statement) {
         return $this->db->prepare($statement);
     }
 
+    public function executeQuery($query){
+        return mysqli_query($this->getMysqliDB(),$query);
+    }
+
+    public function getRealEscapeString($parameter) {
+        return mysqli_real_escape_string($this->getMysqliDB(), $parameter);
+    }
+
+    public function getGeneratedId()
+    {
+        return mysqli_insert_id($this->getMysqliDB());
+    }
 }
