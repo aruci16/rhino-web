@@ -12,11 +12,13 @@ class Discount
     private $name;
     private $discountTypeID;
     private $business;
+    private $businessProductID;
     private $category;
     private $value;
     private $description;
     private $startTime;
     private $endTime;
+    private $isActive;
 
     /**
      * Discount constructor.
@@ -186,6 +188,26 @@ class Discount
     {
         $this->category = $category;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getisActive()
+    {
+        return $this->isActive;
+    }
+
+    /**
+     * @param mixed $isActive
+     */
+    public function setIsActive($isActive)
+    {
+        $this->isActive = $isActive;
+    }
+
+
+
+
 
 
 

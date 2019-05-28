@@ -54,11 +54,24 @@ class DiscountDAO extends DBConnection
     public  function saveDiscount(Discount $discount){
         $query = "INSERT INTO discount(id, name, discounttypeid, businessproductid, value, description, starttime, endtime) " .
             "VALUES ({$this->getRealEscapeString($discount->getName())} " .
-            "      , {$this->getRealEscapeString($discount->getDiscountTypeID())} " .
+            "      , {$this->getRealEscapeString($discount->getDiscountTypeID())} ".
+            "      , {$this->getRealEscapeString($discount->getBusinessProductID())} " .
             "      , {$this->getRealEscapeString($discount->getValue())} " .
             "      , {$this->getRealEscapeString($discount->getDescription())} " .
             "      , {$this->getRealEscapeString($discount->getStartTime())}".
             "      , '{$this->getRealEscapeString($discount->getEndTime())}') ";
+
+        $this->executeQuery($query);
+    }
+
+    public function updateDiscount(Discount $discount){
+        $query="UPDATE discount " .
+            "SET StartTime = {$this->getRealEscapeString($discount->getStartTime())} " .
+            "  , EndTime = {$this->getRealEscapeString($discount->getEndTime())} " .
+            "  , Description = {$this->getRealEscapeString($discount->getDescription())} " .
+            "  , Value = {$this->getRealEscapeString($discount->getValue())} " .
+            "  , IsActive = {$this->getRealEscapeString($discount->getisActive())} " .
+            "WHERE ID = {$this->getRealEscapeString($discount->getId())}";
 
         $this->executeQuery($query);
     }

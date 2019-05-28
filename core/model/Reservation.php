@@ -11,6 +11,7 @@ class Reservation
     private $id;
     private $userID;
     private $discountID;
+    private $discount;
     private $datetime;
     private $code;
 
@@ -102,6 +103,23 @@ class Reservation
     {
         $this->code = $code;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getDiscount()
+    {
+        return $this->discount;
+    }
+
+    /**
+     * @param mixed $discount
+     */
+    public function setDiscount($discount)
+    {
+        $this->discount = $discount;
+    }
+
 
 
 
