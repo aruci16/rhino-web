@@ -116,6 +116,9 @@ section.main{
     border: none !important;
     color: white;
 }
+.center {
+    text-align: center !important;
+}
 
 .rev-right{
 	float: right;
@@ -284,4 +287,58 @@ form .col_half {
 }
 .col_half {
     width: 48%;
+}
+
+.form-control {
+    border-radius: 3px;
+}
+.form-control {
+    display: block;
+    width: 100%;
+    height: calc(2.25rem + 2px);
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.divcenter {
+    position: relative !important;
+    float: none !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+.noradius {
+    -webkit-border-radius: 0 !important;
+    -moz-border-radius: 0 !important;
+    -ms-border-radius: 0 !important;
+    -o-border-radius: 0 !important;
+    border-radius: 0 !important;
+}
+.noborder {
+    border: none !important;
+}
+
+.card {
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    border-radius: 0.25rem;
+}
+
+.float-none {
+	float: none !important;
 }
