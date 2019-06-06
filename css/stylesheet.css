@@ -460,3 +460,9 @@ input, button, select, optgroup, textarea {
 .btn-file {
     position: relative;
 }
+
+.btn-primary {
+    color: #fff;
+    background: linear-gradient(to right, #3fedb0 0%, #10bf84 100%) !important;
+    border-color: #3fedb0  !important;
+}
