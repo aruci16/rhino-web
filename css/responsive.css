@@ -1123,7 +1123,7 @@
 	.col_four_fifth,
 	.col_one_sixth,
 	.col_five_sixth {
-		width: 100%;
+		width: 100% !important;
 		margin-right: 0;
 		float: none;
 		margin-bottom: 50px !important;
