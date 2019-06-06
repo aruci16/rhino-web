@@ -24,7 +24,7 @@ class DBConnection
 
     public function __construct()
     {
-        $this->chooseDB(self::$ALEKS_TEST);
+        $this->chooseDB(self::$GRENT_TEST);
 
         $this->db = new PDO('mysql:host='.$this->DB_HOST.';dbname='.$this->DB_NAME.';charset=utf8',
             $this->DB_USER, $this->DB_PASS);
@@ -50,10 +50,10 @@ class DBConnection
                 $this->DB_HOST = "stud-proj.epoka.edu.al";
                 break;
             case self::$GRENT_TEST:
-                $this->DB_USER = "";
-                $this->DB_PASS = "";
-                $this->DB_NAME = "";
-                $this->DB_HOST = "";
+                $this->DB_USER = "b0gSPhRAvo";
+                $this->DB_PASS = "6BsAYM6TWM";
+                $this->DB_NAME = "b0gSPhRAvo";
+                $this->DB_HOST = "remotemysql";
                 break;
             case self::$GRENT_PRODUCTION:
                 $this->DB_USER = "";
