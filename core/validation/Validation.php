@@ -13,15 +13,12 @@ class Validation
     private $patternForEmail = "/^[a-z\d\._-]+@([a-z\d-]+\.)+[a-z]{2,6}$/i";
     private $patternForPassword = "/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{4,}$/";
     private $patternForPhone = "/^0\d{9}$/";
-    private $patternForDeskService="/^([A-Z])[a-zA-Z ]+$/";
     private $nameError = "";
     private $surnameError = "";
     private $usernameError = "";
     private $passwordError = "";
     private $emailError = "";
     private $phoneError = "";
-    private $etcError="";
-    private $deskServiceError="";
     private $error = 0;
 
     /**
@@ -87,21 +84,7 @@ class Validation
         return $this->error;
     }
 
-    /**
-     * @return string
-     */
-    public function getDeskServiceError(): string
-    {
-        return $this->deskServiceError;
-    }
 
-    /**
-     * @return string
-     */
-    public function getEtcError(): string
-    {
-        return $this->etcError;
-    }
 
 
     public function checkForSignUp($attributes)
@@ -115,12 +98,7 @@ class Validation
 
     }
 
-    public function checkDeskService($deskService){
-        if (!preg_match($this->patternForDeskService, $deskService)) {
-            $this->error++;
-            $this->nameError = "Only letters and the first letter must be an uppercase letter !";
-        }
-    }
+
 
     public function checkForUser($attributes) {
         $this->checkUsername($attributes[0]);
@@ -140,7 +118,7 @@ class Validation
     {
         if (!preg_match($this->patternForName_Surname, $name)) {
             $this->error++;
-            $this->nameError = "Desk service must Contain only letters and spaces!";
+            $this->nameError = "Only letters and the first letter must be an uppercase letter ";
         }
     }
 

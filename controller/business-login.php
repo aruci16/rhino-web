@@ -17,10 +17,11 @@ if (isset($_POST["login"])) {
     if (!empty($user)) {
         $_SESSION['id'] = $user[0]['ID'];
 
-        header("Location: home");
+        header("Location: ../view/business-home.php");
     } else {
         $messageError = "Bad Username or Password";
     }
+    header("Location: ../view/business-home.php");
 }
 
-include("../view/index.php");
+//include("../view/welcome.php");

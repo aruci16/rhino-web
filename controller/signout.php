@@ -4,4 +4,4 @@ $_SESSION = array();
 session_destroy();
 
 $host  = $_SERVER['HTTP_HOST'];
-header("Location: http://$host");
+//header("Location: http://$host");

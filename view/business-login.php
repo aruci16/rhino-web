@@ -1,24 +1,25 @@
 <?php
+include("../controller/business-login.php");
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
     <title>Business Login</title>
-    <link rel="stylesheet" href="css/bootstrap.css" type="text/css">
-    <link rel="stylesheet" href="css/animate.css" type="text/css">
-    <link rel="stylesheet" href="css/responsive.css" type="text/css">
-    <link rel="stylesheet" href="css/index.css" type="text/css">
+    <link rel="stylesheet" href="../view/css/bootstrap.css" type="text/css">
+    <link rel="stylesheet" href="../view/css/animate.css" type="text/css">
+    <link rel="stylesheet" href="../view/css/responsive.css" type="text/css">
+    <link rel="stylesheet" href="../view/css/index.css" type="text/css">
 </head>
 <body class="bg">
 
 
 <div class="center">
-    <a href="../index.php"><img src="images/logo1.png" alt="Canvas Logo"></a>
+    <a href="welcome.php"><img src="images/logo1.png" alt="Canvas Logo"></a>
 </div>
 <div style="max-width: 400px; background-color: rgba(255,255,255,0.93);" class="divcenter noradius noborder">
     <div style="padding: 40px;">
-        <form action="login" method="post" enctype="multipart/form-data">
+        <form action="business-login.php" method="post" enctype="multipart/form-data">
             <h3>Login to your Account</h3>
 
             <div class="col_full float-none">
@@ -36,7 +37,7 @@
                 <div class="form-label-group">
                     <input type="password" id="inputPassword" class="form-control"
                            placeholder="Password"
-                           required name="pswd">
+                           required name="password">
                 </div>
             </div>
 

@@ -6,8 +6,7 @@
  * Time: 16:32
  */
 
-require_once '../db/UserDAO.php';
-require_once '../model/User.php';
+
 
 class UserManager
 {

@@ -4,10 +4,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" href="css/bootstrap.css" type="text/css">
-    <link rel="stylesheet" href="css/animate.css" type="text/css">
-    <link rel="stylesheet" href="css/responsive.css" type="text/css">
-    <link rel="stylesheet" href="css/stylesheet.css" type="text/css">
+    <title>Create Discount</title>
+    <link rel="stylesheet" href="../view/css/bootstrap.css" type="text/css">
+    <link rel="stylesheet" href="../view/css/animate.css" type="text/css">
+    <link rel="stylesheet" href="../view/css/responsive.css" type="text/css">
+    <link rel="stylesheet" href="../view/css/index.css" type="text/css">
 </head>
 <body>
 

@@ -55,9 +55,9 @@
             <span class="font-weight-semibold">ADVERTISE YOUR DISCOUNTS</span>
             <h1 class="text-color-light">Grow Your <br> Business</h1>
             <span>
-					<a href="../view/customer-login.php" class="btn custom-btn-style-1 text-color-light mb-5" data-hash=""
+					<a href="customer-login-signup.php" class="btn custom-btn-style-1 text-color-light mb-5" data-hash=""
                        style="margin-right: 20px;">GET YOUR DISCOUNTS</a>
-					<a href="../view/business-login.php" class="btn custom-btn-style-1 text-color-light mb-5" data-hash="">REGISTER AS A BUSINESS</a>
+					<a href="../view/business-login.php" class="btn custom-btn-style-1 text-color-light mb-5" data-hash="">ENTER AS BUSINESS</a>
 				</span>
         </div>
 

@@ -24,7 +24,7 @@ class DBConnection
 
     public function __construct()
     {
-        $this->chooseDB(self::$GRENT_TEST);
+        $this->chooseDB(self::$GRENT_PRODUCTION);
 
         $this->db = new PDO('mysql:host='.$this->DB_HOST.';dbname='.$this->DB_NAME.';charset=utf8',
             $this->DB_USER, $this->DB_PASS);
@@ -56,10 +56,10 @@ class DBConnection
                 $this->DB_HOST = "remotemysql";
                 break;
             case self::$GRENT_PRODUCTION:
-                $this->DB_USER = "";
+                $this->DB_USER = "root";
                 $this->DB_PASS = "";
-                $this->DB_NAME = "";
-                $this->DB_HOST = "";
+                $this->DB_NAME = "rhino";
+                $this->DB_HOST = "localhost";
                 break;
             default:
                 die("<h1 style='color: red;'>Could not connect to DB!</h1>");
