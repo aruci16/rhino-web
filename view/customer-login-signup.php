@@ -35,6 +35,7 @@ include("../controller/customer-login-signUp.php");
 </head>
 <body>
 
+
 <section id="content" style="margin-bottom: 0px;">
 
     <div class="content-wrap">
@@ -107,7 +108,7 @@ include("../controller/customer-login-signUp.php");
 
                     <div class="col_half col_last">
                         <label for="surname">Surname:</label>
-                        <input type="text" id="surname" name="surname" value="<?php if (isset($_POST["surname"])) echo $_POST["lastname"] ?>" class="form-control"
+                        <input type="text" id="surname" name="surname" value="<?php if (isset($_POST["surname"])) echo $_POST["surname"] ?>" class="form-control"
                         placeholder="Surname">
                         <?php
                         if (!empty($validationController->getSurnameError())) {

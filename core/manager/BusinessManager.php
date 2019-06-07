@@ -6,22 +6,39 @@
  * Time: 17:21
  */
 
-require_once '../db/BusinessDAO.php';
-require_once '../model/Business.php';
+
+require_once '../core/model/Business.php';
+require_once '../core/db/BusinessDAO.php';
 
 class BusinessManager
 {
     public function getBusinessByID($id)
     {
-        $filter = array("id" => $id, "name" => null);
+        $filter = array("id" => $id, "name" => null,"userID"=>null);
         $businessDao = new BusinessDAO();
         $user = $businessDao->getBusinesses($filter)[0];
         return $user;
     }
 
+    public function getBusinessByUserID($id)
+    {
+        $filter = array("id" => null, "name" => null,"userID"=>$id);
+        $businessDao = new BusinessDAO();
+        $user = $businessDao->getBusinesses($filter);
+        return $user;
+    }
+
+    public function getCategoriesByBisnessID($id){
+        $filter = array("id" => $id, "name" => null);
+        $businessDao = new BusinessDAO();
+        $categories= $businessDao->getBusinessCategories($filter);
+        return $categories;
+
+    }
+
     public function getBusinessesByName($name)
     {
-        $filter = array("id" => null, "name" => $name);
+        $filter = array("id" => null, "name" => $name ,"userID"=>null);
         $businessDao = new BusinessDAO();
         $users = $businessDao->getBusinesses($filter);
         return $users;
@@ -53,5 +70,10 @@ class BusinessManager
     public function getBusinessesByCategoryId($categoryId) {
         $businessDao = new BusinessDAO();
         return $businessDao->getBusinessesByCategoryId($categoryId);
+    }
+
+    public function  getUsersReservation($id){
+        $businessDao = new BusinessDAO();
+        return $businessDao->getUsersWithReservation($id);
     }
 }

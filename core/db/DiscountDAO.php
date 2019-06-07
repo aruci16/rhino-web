@@ -5,7 +5,7 @@
  * Date: 5/25/2019
  * Time: 5:07 PM
  */
-
+require_once 'DBConnection.php';
 class DiscountDAO extends DBConnection
 {
     public function __construct()
@@ -16,7 +16,7 @@ class DiscountDAO extends DBConnection
     public  function getDiscounts($filter)
     {
         $query = "select discount.ID,discount.Name,discount.Value,discount.StartTime,discount.EndTime,
-                  b.ID as BusinessID, b.Name as BusinessName, bc.Name as Category
+                  b.ID as BusinessID, b.Name as BusinessName, bc.Name as Category,discount.IsActive
                   from discount 
                   inner join business_product bp on discount.BusinessProductID = bp.ID
                   inner join business b on bp.BusinessID = b.ID
@@ -74,6 +74,22 @@ class DiscountDAO extends DBConnection
             "WHERE ID = {$this->getRealEscapeString($discount->getId())}";
 
         $this->executeQuery($query);
+    }
+
+    public  function getDiscountType(){
+        $query="Select discount_type.ID,discount_type.Name,discount_type.Description from discount_type";
+        $discountsTypes=array();
+        $result=$this->executeQuery($query);
+        while ($row = mysqli_fetch_assoc($result)) {
+            $discountType= new DiscountType();
+            $discountType->setId($row["ID"]);
+            $discountType->setName($row["Name"]);
+            $discountType->setDescription($row["Description"]);
+
+            array_push($discountsTypes,$discountType);
+
+        }
+        return $discountsTypes;
     }
 
 

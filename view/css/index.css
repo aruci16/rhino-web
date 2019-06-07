@@ -460,3 +460,25 @@ input, button, select, optgroup, textarea {
 .btn-file {
     position: relative;
 }
+
+.menu-fix{
+    display: block;
+    line-height: 22px;
+    padding: 39px 15px;
+    color: white;
+    font-weight: bold;
+    font-size: 13px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-family: 'Raleway', sans-serif;
+    -webkit-transition: margin .4s ease, padding .4s ease;
+    -o-transition: margin .4s ease, padding .4s ease;
+    transition: margin .4s ease, padding .4s ease;
+    background-color: Transparent;
+    background-repeat:no-repeat;
+    border: none;
+    color: white !important;
+    cursor:pointer;
+    overflow: hidden;
+    outline:none;
+}

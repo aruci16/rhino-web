@@ -6,6 +6,7 @@
  * Time: 12:38 PM
  */
 
+require_once '../core/db/DiscountDAO.php';
 class DiscountManager
 {
     public function getDiscountByBusinessID($businessId)
@@ -22,6 +23,15 @@ class DiscountManager
         $discountDao = new DiscountDAO();
         $discounts = $discountDao->getDiscounts($filter);
         return $discounts;
+    }
+    public function saveDiscount($discount){
+        $discountDao = new DiscountDAO();
+        $discountDao->saveDiscount($discount);
+    }
+
+    public function getDiscountType(){
+        $discountDao = new DiscountDAO();
+        return $discountDao->getDiscountType();
     }
 
 }

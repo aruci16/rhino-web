@@ -7,9 +7,11 @@
  */
 
 require_once 'DBConnection.php';
-require_once '../model/Business.php';
-require_once '../model/BusinessCategory.php';
-require_once '../model/Product.php';
+require_once '../core/model/Business.php';
+require_once '../core/model/BusinessCategory.php';
+require_once '../core/model/Product.php';
+require_once '../core/model/UserReservation.php';
+require_once '../core/model/UserType.php';
 
 class BusinessDAO extends DBConnection
 {
@@ -30,6 +32,9 @@ class BusinessDAO extends DBConnection
         if ($filter['name'] != null) {
             $query .=" AND business.Name = '{$this->getRealEscapeString($filter['name'])}'";
         }
+        if ($filter['userID'] != null) {
+            $query .=" AND business.UserID = '{$this->getRealEscapeString($filter['userID'])}'";
+        }
 
         $result = $this->executeQuery($query);
         $businesses = array();
@@ -42,11 +47,11 @@ class BusinessDAO extends DBConnection
             $business->setLongitude($row['Longitude']);
             $business->setLongitude($row['ImageURL']);
 
-            $businessType = new UserType($row['UserTypeID']);
-            $businessType->setName($row['TypeName']);
-            $business->setType($businessType);
+//            $businessType = new UserType($row['UserTypeID']);
+//            $businessType->setName($row['TypeName']);
+//            $business->setType($businessType);
 
-            $business->setIsActive($row['IsActive']);
+           // $business->setIsActive($row['IsActive']);
 
             array_push($businesses, $business);
         }
@@ -177,6 +182,7 @@ class BusinessDAO extends DBConnection
         return $businessCategories;
     }
 
+
     public function saveBusinessCategory(BusinessCategory $businessCategory)
     {
         $query = "INSERT INTO business_category(Name, Description) 
@@ -202,5 +208,33 @@ class BusinessDAO extends DBConnection
     {
         $query = "DELETE FROM business_category WHERE ID = {$this->getRealEscapeString($id)} ";
         $this->executeQuery($query);
+    }
+
+    public  function getUsersWithReservation($businessID){
+
+        $query="Select user.Name,user.Surname,d.Name as DName,r.Code, d.StartTime,d.EndTime from user
+                inner join reservation r on user.ID = r.UserID
+                inner join discount d on r.DiscountID = d.ID
+                inner join business_product bp on d.BusinessProductID = bp.ID
+                inner join business b on bp.BusinessID = b.ID
+                where d.IsActive=1 and b.ID=".$this->getRealEscapeString($businessID)."
+                order r.DateTime desc";
+        $result = $this->executeQuery($query);
+        $users = array();
+        while ($row = $result->fetch_assoc()) {
+
+            $userReservation= new UserReservation();
+            $userReservation->setUserName($row['Name']);
+            $userReservation->setUserSurname($row['Surname']);
+            $userReservation->setDiscountName($row['DName']);
+            $userReservation->setReservationCode($row['Code']);
+            $userReservation->setStartTime($row['StartTime']);
+            $userReservation->setEndTime($row['EndTime']);
+
+
+            array_push($users, $userReservation);
+        }
+        return $users;
+
     }
 }
